@@ -24,6 +24,7 @@ class CustomTheme {
       ),
       appBarTheme: const AppBarTheme(
         elevation: 0,
+        backgroundColor: Colors.white,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         iconTheme: IconThemeData(color: Colors.black),
         titleTextStyle: TextStyle(
