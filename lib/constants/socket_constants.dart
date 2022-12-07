@@ -1,4 +1,5 @@
 class SocketConstants {
+  //DINER
   static const addToOrder = 'order:add-item';
   static const callWaiter = 'table:call-waiter';
   static const changeTableStatus = 'table:change-status';
