@@ -1,4 +1,7 @@
 class SocketConstants {
+  //GENERAL
+  static const error = 'error';
+
   //DINER
   static const addToOrder = 'order:add-item';
   static const callWaiter = 'table:call-waiter';
