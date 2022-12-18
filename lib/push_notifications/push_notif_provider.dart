@@ -6,7 +6,6 @@ final pushNotificationProvider = Provider<PushNotificationProvider>((ref) {
 });
 
 class PushNotificationProvider {
-
   Future<void> setupInteractedMessage() async {
     RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
