@@ -6,4 +6,5 @@ class LottieAssets {
   static const login = 'packages/oyt_front_core/assets/lottie/login.json';
   static const ordering = 'packages/oyt_front_core/assets/lottie/ordering.json';
   static const preparingFood = 'packages/oyt_front_core/assets/lottie/preparing-food.json';
+  static const uploadFile = 'packages/oyt_front_core/assets/lottie/photo-files-upload.json';
 }
