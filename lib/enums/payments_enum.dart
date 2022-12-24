@@ -1,6 +1,6 @@
 enum PaymentMethod {
   cash(title: 'Efectivo', paymentValue: 'cash'),
-  card(title: 'Tarjeta credito', paymentValue: 'card'),
+  card(title: 'Tarjeta credito/debito', paymentValue: 'card'),
   pse(title: 'PSE', paymentValue: 'pse');
 
   const PaymentMethod({required this.title, required this.paymentValue});
