@@ -43,4 +43,5 @@ class CustomTheme {
     boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
   );
   static final redColor = Colors.red[700];
+  static const drawerBodyPadding = EdgeInsets.symmetric(horizontal: 20);
 }
