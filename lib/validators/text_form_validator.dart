@@ -15,6 +15,13 @@ class TextFormValidator {
     return null;
   }
 
+  static String? mandatoryFieldValidator(String? value, {String? message}) {
+    if (value == null || value.isEmpty) {
+      return message ?? 'Por favor, ingresa un valor';
+    }
+    return null;
+  }
+
   static String? emailValidator(String? value) {
     final validForm =
         RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
