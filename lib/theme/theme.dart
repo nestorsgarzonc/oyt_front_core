@@ -36,4 +36,12 @@ class CustomTheme {
       visualDensity: VisualDensity.adaptivePlatformDensity,
     );
   }
+
+  static const dialogPadding = EdgeInsets.symmetric(vertical: 10, horizontal: 15);
+  static const drawerBoxDecoration = BoxDecoration(
+    color: Colors.white,
+    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
+  );
+  static final redColor = Colors.red[700];
+  static const drawerBodyPadding = EdgeInsets.symmetric(horizontal: 20);
 }
