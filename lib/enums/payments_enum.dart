@@ -1,6 +1,8 @@
 enum PaymentMethod {
   cash(title: 'Efectivo', paymentValue: 'cash'),
   card(title: 'Tarjeta credito/debito', paymentValue: 'card'),
+  nequiTransfer(title: 'Transferencia Nequi', paymentValue: 'nequiTransfer'),
+  daviplataTransfer(title: 'Transferencia Daviplata', paymentValue: 'daviplataTransfer'),
   pse(title: 'PSE', paymentValue: 'pse');
 
   const PaymentMethod({required this.title, required this.paymentValue});
