@@ -14,6 +14,10 @@ class SocketConstants {
   static const onNewUserJoined = 'new_user_joined';
   static const orderNow = 'table:order-now';
   static const stopCallWaiter = 'table:stop-calling-waiter';
+  static const askAccount = 'order:ask-account';
+  static const tableOrder = 'order:table-order';
+  static const singlePayment = 'single_payment';
+  static const payAccountSingle = 'order:pay-account-single';
 
   //WAITER
   static const addToOrderToUser = 'waiter:add-item-to-table';
