@@ -9,15 +9,15 @@ class SocketConstants {
   static const deleteItem = 'order:delete-item';
   static const editItem = 'order:edit-item';
   static const joinSocket = 'table:join';
-  static const listenOnPay = 'on_payed_account';
+  static const listenOnPay = 'on_payed_account'; // listen: cuando todos terminaron de pagar (solo pago individual)
   static const listOfOrders = 'list_of_orders';
   static const onNewUserJoined = 'new_user_joined';
   static const orderNow = 'table:order-now';
   static const stopCallWaiter = 'table:stop-calling-waiter';
   static const askAccount = 'order:ask-account';
   static const tableOrder = 'order:table-order';
-  static const singlePayment = 'single_payment';
-  static const payAccountSingle = 'order:pay-account-single';
+  static const singlePayment = 'single_payment'; //listen
+  static const payAccountSingle = 'order:pay-account-single'; //emit
 
   //WAITER
   static const addToOrderToUser = 'waiter:add-item-to-table';
