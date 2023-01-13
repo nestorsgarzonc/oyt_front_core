@@ -1,13 +1,18 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oyt_front_core/constants/firebase_constants.dart';
 import 'package:oyt_front_core/firebase_messaging.dart';
 import 'package:oyt_front_core/logger/logger.dart';
 
-class PushNotificationProvider {
-  PushNotificationProvider({required this.messengerKey});
+final pushNotificationsProvider = Provider<PushNotificationProvider>((ref) {
+  return PushNotificationProvider();
+});
 
-  final GlobalKey<ScaffoldMessengerState> messengerKey;
+class PushNotificationProvider {
+  PushNotificationProvider();
+
+  final messengerKey = GlobalKey<ScaffoldMessengerState>();
 
   MaterialBanner showMaterialBanner(RemoteMessage message, void Function() onHide) {
     return MaterialBanner(
@@ -31,11 +36,8 @@ class PushNotificationProvider {
   Future<void> setupInteractedMessage() async {
     await Future.wait([
       FirebaseMessagingUtils.requestPermissions(),
-      FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-        alert: true,
-        badge: true,
-        sound: true,
-      ),
+      FirebaseMessaging.instance
+          .setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true),
     ]);
     try {
       await FirebaseMessaging.instance.getToken(vapidKey: FirebaseConstants.vapidKey);
@@ -46,6 +48,15 @@ class PushNotificationProvider {
     listenMessages();
     if (initialMessage != null) {
       FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+    }
+  }
+
+  Future<String?> getToken() async {
+    try {
+      return await FirebaseMessaging.instance.getToken(vapidKey: FirebaseConstants.vapidKey);
+    } catch (e, s) {
+      Logger.logError('Error getting FCM token $e', s);
+      return null;
     }
   }
 
