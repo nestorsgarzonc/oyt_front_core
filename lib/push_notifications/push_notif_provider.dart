@@ -36,8 +36,12 @@ class PushNotificationProvider {
         badge: true,
         sound: true,
       ),
-      FirebaseMessaging.instance.getToken(vapidKey: FirebaseConstants.vapidKey),
     ]);
+    try {
+      await FirebaseMessaging.instance.getToken(vapidKey: FirebaseConstants.vapidKey);
+    } catch (e, s) {
+      Logger.logError('Error getting FCM token $e', s);
+    }
     final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
     listenMessages();
     if (initialMessage != null) {
