@@ -19,7 +19,7 @@ abstract class ApiHandler {
   Future<Map<String, String>> getHeaders();
   Uri getUri(String path);
   void logOnError(String path, Map<String, dynamic>? body, String exception, StackTrace stackTrace);
-  void logOnStart(String path, Map<String, dynamic>? body, String method);
+  void logOnStart(String path, Map<String, dynamic>? body, String method, Map headers);
   void logOnSuccess(ApiResponse response);
   List<int> processBody(Map<String, dynamic> body);
 }
@@ -32,8 +32,8 @@ class ApiHandlerImpl implements ApiHandler {
   @override
   Future<ApiResponse> delete(String path) async {
     try {
-      logOnStart(path, null, 'DELETE');
       final headers = await getHeaders();
+      logOnStart(path, null, 'DELETE', headers);
       final res = await http.delete(getUri(path), headers: headers);
       final apiResponse = ApiResponse(
         path: path,
@@ -54,8 +54,8 @@ class ApiHandlerImpl implements ApiHandler {
   @override
   Future<ApiResponse> get(String path) async {
     try {
-      logOnStart(path, null, 'GET');
       final headers = await getHeaders();
+      logOnStart(path, null, 'GET', headers);
       final res = await http.get(getUri(path), headers: headers);
       final apiResponse = ApiResponse(
         path: path,
@@ -76,8 +76,8 @@ class ApiHandlerImpl implements ApiHandler {
   @override
   Future<ApiResponse> patch(String path, Map<String, dynamic> body) async {
     try {
-      logOnStart(path, null, 'PATCH');
       final headers = await getHeaders();
+      logOnStart(path, null, 'PATCH', headers);
       final res = await http.patch(getUri(path), headers: headers, body: processBody(body));
       final apiResponse = ApiResponse(
         path: path,
@@ -98,8 +98,8 @@ class ApiHandlerImpl implements ApiHandler {
   @override
   Future<ApiResponse> post(String path, Map<String, dynamic> body) async {
     try {
-      logOnStart(path, null, 'POST');
       final headers = await getHeaders();
+      logOnStart(path, null, 'POST', headers);
       final res = await http.post(getUri(path), headers: headers, body: processBody(body));
       final apiResponse = ApiResponse(
         path: path,
@@ -120,8 +120,8 @@ class ApiHandlerImpl implements ApiHandler {
   @override
   Future<ApiResponse> put(String path, Map<String, dynamic> body) async {
     try {
-      logOnStart(path, null, 'PUT');
       final headers = await getHeaders();
+      logOnStart(path, null, 'PUT', headers);
       final res = await http.put(getUri(path), headers: headers, body: processBody(body));
       final apiResponse = ApiResponse(
         path: path,
@@ -157,11 +157,12 @@ class ApiHandlerImpl implements ApiHandler {
   }
 
   @override
-  void logOnStart(String path, Map<String, dynamic>? body, String method) {
+  void logOnStart(String path, Map<String, dynamic>? body, String method, Map headers) {
     Logger.log('######## API START ########');
     Logger.log('Path: $path');
     Logger.log('Body: $body');
     Logger.log('METHOD: $method');
+    Logger.log('HEADERS: $headers');
     Logger.log('######## END API START ########');
   }
 
@@ -178,12 +179,18 @@ class ApiHandlerImpl implements ApiHandler {
 
   @override
   Future<Map<String, String>> getHeaders() async {
-    final token =
-        await ref.read(dbHandlerProvider).get(DbConstants.bearerTokenKey, DbConstants.authBox);
+    final dbProv = ref.read(dbHandlerProvider);
+    final threadsResponse = await Future.wait([
+      dbProv.get(DbConstants.bearerTokenKey, DbConstants.authBox),
+      dbProv.get(DbConstants.restaurantsKey, DbConstants.restaurantBox)
+    ]);
+    final token = threadsResponse[0];
+    final restaurantId = threadsResponse[1];
     return {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       if (token != null) 'auth-token': token,
+      if (restaurantId != null) 'restaurantId': restaurantId,
     };
   }
 

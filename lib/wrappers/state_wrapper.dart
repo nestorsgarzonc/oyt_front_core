@@ -21,6 +21,7 @@ class StateAsync<T> extends Equatable {
   final T? _data;
   final Failure? _error;
 
+  bool get isSucess => _state == States.success;
   States get state => _state;
   T? get data => _data;
   Failure? get error => _error;
