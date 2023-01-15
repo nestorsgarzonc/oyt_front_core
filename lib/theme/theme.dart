@@ -21,6 +21,8 @@ class CustomTheme {
       listTileTheme: ListTileThemeData(
         tileColor: Colors.white.withOpacity(0.9),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        minLeadingWidth: 5,
+        horizontalTitleGap: 8,
       ),
       appBarTheme: const AppBarTheme(
         elevation: 0,
