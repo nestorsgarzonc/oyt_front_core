@@ -6,5 +6,8 @@ class Failure extends Equatable {
   final String message;
 
   @override
+  String toString() => message;
+
+  @override
   List<Object?> get props => [message];
 }
