@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oyt_front_core/constants/firebase_constants.dart';
@@ -40,7 +41,8 @@ class PushNotificationProvider {
           .setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true),
     ]);
     try {
-      await FirebaseMessaging.instance.getToken(vapidKey: FirebaseConstants.vapidKey);
+      await FirebaseMessaging.instance
+          .getToken(vapidKey: kIsWeb ? FirebaseConstants.vapidKey : null);
     } catch (e, s) {
       Logger.logError('Error getting FCM token $e', s);
     }
