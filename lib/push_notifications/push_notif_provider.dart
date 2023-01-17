@@ -53,7 +53,9 @@ class PushNotificationProvider {
 
   Future<String?> getToken() async {
     try {
-      return await FirebaseMessaging.instance.getToken(vapidKey: FirebaseConstants.vapidKey);
+      return await FirebaseMessaging.instance
+          .getToken(vapidKey: FirebaseConstants.vapidKey)
+          .timeout(const Duration(seconds: 2), onTimeout: () => null);
     } catch (e, s) {
       Logger.logError('Error getting FCM token $e', s);
       return null;
