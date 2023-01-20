@@ -1,6 +1,6 @@
 enum PaymentMethod {
   cash(title: 'Efectivo', paymentValue: 'cash'),
-  card(title: 'Tarjeta credito/debito', paymentValue: 'card'),
+  card(title: 'Tarjeta crédito/débito', paymentValue: 'card'),
   nequiTransfer(title: 'Transferencia Nequi', paymentValue: 'nequiTransfer'),
   daviplataTransfer(title: 'Transferencia Daviplata', paymentValue: 'daviplataTransfer'),
   pse(title: 'PSE', paymentValue: 'pse');
