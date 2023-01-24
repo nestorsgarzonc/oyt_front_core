@@ -1,18 +1,24 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:oyt_front_core/extensions/date_of_time_extension.dart';
 
 enum Weekdays {
-  monday(name: 'Lunes'),
-  tuesday(name: 'Martes'),
-  wednesday(name: 'Miercoles'),
-  thursday(name: 'Jueves'),
-  friday(name: 'Viernes'),
-  saturday(name: 'Sabado'),
-  sunday(name: 'Domingo'),
-  holiday(name: 'Festivos');
+  monday(spanishName: 'Lunes'),
+  tuesday(spanishName: 'Martes'),
+  wednesday(spanishName: 'Miercoles'),
+  thursday(spanishName: 'Jueves'),
+  friday(spanishName: 'Viernes'),
+  saturday(spanishName: 'Sabado'),
+  sunday(spanishName: 'Domingo'),
+  holiday(spanishName: 'Festivos');
 
-  const Weekdays({required this.name});
+  const Weekdays({required this.spanishName});
 
-  final String name;
+  static Weekdays? fromName(String name) {
+    return values.firstWhereOrNull((e) => e.spanishName == name);
+  }
+
+  final String spanishName;
 }
 
 class Weekday {
@@ -27,6 +33,12 @@ class Weekday {
   TimeOfDay closeTime;
 
   static final weekdays = Weekdays.values.map((e) => Weekday(e)).toList();
+
+  Map<String, dynamic> toMap() => {
+        'weekday': weekday.name,
+        'openTime': openTime.formated,
+        'closeTime': closeTime.formated,
+      };
 
   @override
   bool operator ==(covariant Weekday other) {
