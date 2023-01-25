@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-
 enum PaymentMethod {
   cash(title: 'Efectivo', paymentValue: 'cash'),
   card(title: 'Tarjeta crédito/débito', paymentValue: 'card'),
