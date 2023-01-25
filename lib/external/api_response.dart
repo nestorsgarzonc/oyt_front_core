@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 class ApiResponse extends Equatable {
@@ -31,6 +33,7 @@ class ApiResponse extends Equatable {
     if (body is List<dynamic>) return body;
     return null;
   }
+
   String get headersFormatted => _decoder.convert(headers);
   String get responseFormatted => _decoder.convert(bodyJson);
 
@@ -38,4 +41,9 @@ class ApiResponse extends Equatable {
 
   @override
   List<Object?> get props => [body, statusCode, path, headers, response];
+
+  @override
+  String toString() {
+    return 'ApiResponse{path: $path, response: $response, body: $body, statusCode: $statusCode, headers: $headers}';
+  }
 }

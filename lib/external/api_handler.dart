@@ -19,6 +19,7 @@ abstract class ApiHandler {
   Future<Map<String, String>> getHeaders();
   Uri getUri(String path);
   void logOnError(String path, Map<String, dynamic>? body, String exception, StackTrace stackTrace);
+  void logOnApiException(ApiException apiException);
   void logOnStart(String path, Map<String, dynamic>? body, String method, Map headers);
   void logOnSuccess(ApiResponse response);
   List<int> processBody(Map<String, dynamic> body);
@@ -45,6 +46,9 @@ class ApiHandlerImpl implements ApiHandler {
       if (apiResponse.isError) throw ApiException(apiResponse);
       logOnSuccess(apiResponse);
       return apiResponse;
+    } on ApiException catch (e) {
+      logOnApiException(e);
+      rethrow;
     } catch (e, s) {
       logOnError(path, null, e.toString(), s);
       rethrow;
@@ -67,6 +71,9 @@ class ApiHandlerImpl implements ApiHandler {
       if (apiResponse.isError) throw ApiException(apiResponse);
       logOnSuccess(apiResponse);
       return apiResponse;
+    } on ApiException catch (e) {
+      logOnApiException(e);
+      rethrow;
     } catch (e, s) {
       logOnError(path, null, e.toString(), s);
       rethrow;
@@ -89,6 +96,9 @@ class ApiHandlerImpl implements ApiHandler {
       if (apiResponse.isError) throw ApiException(apiResponse);
       logOnSuccess(apiResponse);
       return apiResponse;
+    } on ApiException catch (e) {
+      logOnApiException(e);
+      rethrow;
     } catch (e, s) {
       logOnError(path, null, e.toString(), s);
       rethrow;
@@ -111,6 +121,9 @@ class ApiHandlerImpl implements ApiHandler {
       if (apiResponse.isError) throw ApiException(apiResponse);
       logOnSuccess(apiResponse);
       return apiResponse;
+    } on ApiException catch (e) {
+      logOnApiException(e);
+      rethrow;
     } catch (e, s) {
       logOnError(path, null, e.toString(), s);
       rethrow;
@@ -133,6 +146,9 @@ class ApiHandlerImpl implements ApiHandler {
       if (apiResponse.isError) throw ApiException(apiResponse);
       logOnSuccess(apiResponse);
       return apiResponse;
+    } on ApiException catch (e) {
+      logOnApiException(e);
+      rethrow;
     } catch (e, s) {
       logOnError(path, null, e.toString(), s);
       rethrow;
@@ -141,6 +157,14 @@ class ApiHandlerImpl implements ApiHandler {
 
   @override
   Uri getUri(String path) => Uri.parse('${ApiConstants.baseUrl}$path');
+
+  @override
+  void logOnApiException(ApiException apiException) {
+    Logger.log('######## API EXCEPTION ########');
+    Logger.log('ApiResponse: ${apiException.response.toString()}');
+    Logger.log('Error: ${apiException.toString()}');
+    Logger.log('######## END API FAILURE ########');
+  }
 
   @override
   void logOnError(
