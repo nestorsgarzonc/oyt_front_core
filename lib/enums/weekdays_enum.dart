@@ -28,6 +28,14 @@ class Weekday {
     this.closeTime = const TimeOfDay(hour: 20, minute: 0),
   });
 
+  factory Weekday.fromMap(Map<String, dynamic> map) {
+    return Weekday(
+      Weekdays.values.firstWhere((e) => e.name == map['weekday'] as String),
+      openTime: (map['openTime'] as String).toTimeOfDay,
+      closeTime: (map['closeTime'] as String).toTimeOfDay,
+    );
+  }
+
   final Weekdays weekday;
   TimeOfDay openTime;
   TimeOfDay closeTime;

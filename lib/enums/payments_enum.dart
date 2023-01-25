@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 enum PaymentMethod {
   cash(title: 'Efectivo', paymentValue: 'cash'),
   card(title: 'Tarjeta crédito/débito', paymentValue: 'card'),
@@ -9,6 +11,10 @@ enum PaymentMethod {
 
   final String title;
   final String paymentValue;
+
+  static PaymentMethod fromString(String value) {
+    return values.firstWhere((e) => e.paymentValue == value);
+  }
 }
 
 enum PaymentWay {
