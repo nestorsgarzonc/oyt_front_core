@@ -15,4 +15,5 @@ class LottieAssets {
   static const chefPreparingFood = 'packages/oyt_front_core/assets/lottie/chef-preparing-food.json';
   static const cooking = 'packages/oyt_front_core/assets/lottie/cooking.json';
   static const truckLeavingMerch = 'packages/oyt_front_core/assets/lottie/truck-leaving-merch.json';
+  static const notFound = 'packages/oyt_front_core/assets/lottie/not-found.json';
 }
