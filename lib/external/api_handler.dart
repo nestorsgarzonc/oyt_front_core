@@ -11,8 +11,8 @@ import 'package:oyt_front_core/logger/logger.dart';
 final apiHandlerProvider = Provider<ApiHandler>((ref) => ApiHandlerImpl(ref: ref));
 
 abstract class ApiHandler {
-  Future<ApiResponse> delete(String path);
   Future<ApiResponse> get(String path);
+  Future<ApiResponse> delete(String path, Map<String, dynamic> body);
   Future<ApiResponse> patch(String path, Map<String, dynamic> body);
   Future<ApiResponse> post(String path, Map<String, dynamic> body);
   Future<ApiResponse> put(String path, Map<String, dynamic> body);
@@ -31,11 +31,11 @@ class ApiHandlerImpl implements ApiHandler {
   final Ref ref;
 
   @override
-  Future<ApiResponse> delete(String path) async {
+  Future<ApiResponse> delete(String path, Map<String, dynamic> body) async {
     try {
       final headers = await getHeaders();
       logOnStart(path, null, 'DELETE', headers);
-      final res = await http.delete(getUri(path), headers: headers);
+      final res = await http.delete(getUri(path), headers: headers, body: processBody(body));
       final apiResponse = ApiResponse(
         path: path,
         body: null,
