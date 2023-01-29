@@ -5,7 +5,7 @@ homepage: https://github.com/nestorsgarzonc
 
 environment:
   sdk: ">=2.19.0 <3.0.0"
-  flutter: ">=3.3.10"
+  flutter: ">=3.7.0"
 
 dependencies:
   collection: ^1.16.0
