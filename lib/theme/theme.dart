@@ -1,40 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomTheme {
-  static final ThemeData myTheme = ThemeData(
-    useMaterial3: true,
-    colorSchemeSeed: Colors.deepOrange,
-    listTileTheme: const ListTileThemeData(
-      minLeadingWidth: 5,
-      horizontalTitleGap: 8,
-    ),
-    appBarTheme: const AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
-      iconTheme: IconThemeData(color: Colors.black),
-      titleTextStyle: TextStyle(
-        color: Colors.black,
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
+final themeProvider = StateNotifierProvider<CustomTheme, ThemeData>((ref) {
+  return CustomTheme();
+});
+
+class CustomTheme extends StateNotifier<ThemeData> {
+  CustomTheme()
+      : super(
+          ThemeData(
+            useMaterial3: true,
+            colorSchemeSeed: Colors.deepOrange,
+            listTileTheme: const ListTileThemeData(
+              minLeadingWidth: 5,
+              horizontalTitleGap: 8,
+            ),
+            appBarTheme: const AppBarTheme(
+              systemOverlayStyle: SystemUiOverlayStyle.dark,
+              iconTheme: IconThemeData(color: Colors.black),
+              titleTextStyle: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+        );
+
+  void changeSeedColor(Color color) {
+    state = ThemeData(
+      useMaterial3: true,
+      colorSchemeSeed: color,
+      listTileTheme: const ListTileThemeData(
+        minLeadingWidth: 5,
+        horizontalTitleGap: 8,
       ),
-    ),
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-  );
+      appBarTheme: const AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        iconTheme: IconThemeData(color: Colors.black),
+        titleTextStyle: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+    );
+  }
 
   // [TEXT STYLES]
   static const sectionTitleStyle = TextStyle(fontWeight: FontWeight.w600, fontSize: 16);
   static const selectedItemTextStyle =
       TextStyle(fontWeight: FontWeight.w600, color: Colors.deepOrange);
   // [BOX DECORATIONS]
-  static final drawerBoxDecoration = BoxDecoration(
-    color: myTheme.cardColor,
-    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
-  );
-  static final roundedBoxDecoration = BoxDecoration(
-    color: myTheme.cardColor,
-    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
-    borderRadius: const BorderRadius.all(Radius.circular(10)),
-  );
+  BoxDecoration get drawerBoxDecoration => BoxDecoration(
+        color: state.cardColor,
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
+      );
+  BoxDecoration get roundedBoxDecoration => BoxDecoration(
+        color: state.cardColor,
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+      );
   // [PADDINGS]
   static const drawerBodyPadding = EdgeInsets.symmetric(horizontal: 20);
   static const dialogPadding = EdgeInsets.symmetric(vertical: 10, horizontal: 15);
