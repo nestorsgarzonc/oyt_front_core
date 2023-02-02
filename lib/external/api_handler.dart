@@ -34,7 +34,7 @@ class ApiHandlerImpl implements ApiHandler {
   Future<ApiResponse> delete(String path, Map<String, dynamic> body) async {
     try {
       final headers = await getHeaders();
-      logOnStart(path, null, 'DELETE', headers);
+      logOnStart(path, body, 'DELETE', headers);
       final res = await http.delete(getUri(path), headers: headers, body: processBody(body));
       final apiResponse = ApiResponse(
         path: path,
@@ -84,7 +84,7 @@ class ApiHandlerImpl implements ApiHandler {
   Future<ApiResponse> patch(String path, Map<String, dynamic> body) async {
     try {
       final headers = await getHeaders();
-      logOnStart(path, null, 'PATCH', headers);
+      logOnStart(path, body, 'PATCH', headers);
       final res = await http.patch(getUri(path), headers: headers, body: processBody(body));
       final apiResponse = ApiResponse(
         path: path,
@@ -109,7 +109,7 @@ class ApiHandlerImpl implements ApiHandler {
   Future<ApiResponse> post(String path, Map<String, dynamic> body) async {
     try {
       final headers = await getHeaders();
-      logOnStart(path, null, 'POST', headers);
+      logOnStart(path, body, 'POST', headers);
       final res = await http.post(getUri(path), headers: headers, body: processBody(body));
       final apiResponse = ApiResponse(
         path: path,
@@ -134,7 +134,7 @@ class ApiHandlerImpl implements ApiHandler {
   Future<ApiResponse> put(String path, Map<String, dynamic> body) async {
     try {
       final headers = await getHeaders();
-      logOnStart(path, null, 'PUT', headers);
+      logOnStart(path, body, 'PUT', headers);
       final res = await http.put(getUri(path), headers: headers, body: processBody(body));
       final apiResponse = ApiResponse(
         path: path,

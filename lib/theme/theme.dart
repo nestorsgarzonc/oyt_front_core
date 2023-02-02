@@ -50,8 +50,8 @@ class CustomTheme extends StateNotifier<ThemeData> {
 
   // [TEXT STYLES]
   static const sectionTitleStyle = TextStyle(fontWeight: FontWeight.w600, fontSize: 16);
-  static const selectedItemTextStyle =
-      TextStyle(fontWeight: FontWeight.w600, color: Colors.deepOrange);
+  TextStyle get selectedItemTextStyle =>
+      TextStyle(fontWeight: FontWeight.w600, color: state.primaryColor);
   // [BOX DECORATIONS]
   BoxDecoration get drawerBoxDecoration => BoxDecoration(
         color: state.cardColor,
@@ -59,8 +59,8 @@ class CustomTheme extends StateNotifier<ThemeData> {
       );
   BoxDecoration get roundedBoxDecoration => BoxDecoration(
         color: state.cardColor,
-        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)],
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
       );
   // [PADDINGS]
   static const drawerBodyPadding = EdgeInsets.symmetric(horizontal: 20);
