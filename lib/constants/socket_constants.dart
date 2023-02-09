@@ -1,6 +1,7 @@
 class SocketConstants {
   //GENERAL
   static const error = 'error';
+  static const eventBus = 'eventBus';
 
   //DINER
   static const addToOrder = 'order:add-item';
