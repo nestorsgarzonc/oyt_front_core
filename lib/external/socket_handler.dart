@@ -18,6 +18,7 @@ abstract class SocketIOHandler {
   void onMap(String event, EventHandlerMap callback);
   void onConnect(EventHandler callback);
   void onDisconnect(EventHandler callback);
+  void onReconnect(EventHandler callback);
   void emit(String event, String data);
   void emitMap(String event, Map<String, dynamic> data);
   void disconnect();
@@ -79,5 +80,15 @@ class SocketIOHandlerImpl implements SocketIOHandler {
   @override
   void onConnect(EventHandler callback) {
     socket!.onConnect((data) => callback(data));
+  }
+
+  @override
+  void onReconnect(EventHandler callback) {
+    socket!.onReconnect((data) {
+      Logger.log('####### SOCKET RECONNECT #######');
+      Logger.log('Reconnecting');
+      Logger.log('####### END SOCKET RECONNECT #######');
+      callback(data);
+    });
   }
 }
