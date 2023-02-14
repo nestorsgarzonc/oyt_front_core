@@ -17,6 +17,7 @@ class SocketConstants {
   static const stopCallWaiter = 'table:stop-calling-waiter';
   static const askAccount = 'order:ask-account';
   static const tableOrder = 'order:table-order';
+  static const leaveTableDinner = 'table:leave';
   static const singlePayment = 'single_payment'; //listen
   static const payAccountSingle = 'order:pay-account-single'; //emit
 
