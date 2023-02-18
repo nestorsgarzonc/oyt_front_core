@@ -15,6 +15,13 @@ class TextFormValidator {
     return null;
   }
 
+  static String? orderPriceValidator (String? price) {
+    if (price == null || price.isEmpty) {
+      return 'Por favor, ingrese un valor.';
+    }
+    return null;
+  }
+
   static String? mandatoryFieldValidator(String? value, {String? message}) {
     if (value == null || value.isEmpty) {
       return message ?? 'Por favor, ingresa un valor';
