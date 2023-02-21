@@ -1,4 +1,3 @@
 class UrlConstants {
-  //TODO: ADD DINNER URL
-  static const dinnerUrl = '';
+  static const dinnerUrl = 'https://on-your-table-client.vercel.app/#';
 }
