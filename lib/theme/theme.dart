@@ -22,6 +22,7 @@ class CustomTheme extends StateNotifier<ThemeData> {
               titleTextStyle: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
+                color: Colors.black,
               ),
             ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
