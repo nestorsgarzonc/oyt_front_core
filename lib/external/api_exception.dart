@@ -10,7 +10,8 @@ class ApiException extends Equatable {
   String get error {
     final resMap = response.responseMap;
     if (resMap == null) return generalError;
-    final error = resMap['msg'] ?? generalError;
+    final error = resMap['msg'];
+    if (error is! String) return generalError;
     return error;
   }
 
