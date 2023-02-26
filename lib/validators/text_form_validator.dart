@@ -16,8 +16,9 @@ class TextFormValidator {
   }
 
   static String? orderPriceValidator (String? price) {
-    if (price == null || price.isEmpty) {
-      return 'Por favor, ingrese un valor.';
+    final validForm = RegExp(r'^[0-9]*$');
+    if (!validForm.hasMatch(price!)) {
+      return 'Ese valor no es válido';
     }
     return null;
   }
