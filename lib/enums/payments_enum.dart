@@ -23,6 +23,10 @@ enum PaymentWay {
 
   final String paymentValue;
   final String title;
+
+  static PaymentWay fromString(String value) {
+    return values.firstWhere((e) => e.paymentValue == value);
+  }
 }
 
 enum PaymentTip {
